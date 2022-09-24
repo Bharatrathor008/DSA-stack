@@ -5,17 +5,12 @@ struct STACK
     int *stack;
     int max_size;
     int top;
-}; //STACK structure for stack items.
+}; // STACK structure for stack items.
 
-// peek function retuns the item of given position. 
-int peek(struct STACK *ptr, int position){
-    if((ptr->top - position + 1 )< 0){
-        printf("\nYou have entered invalid position!\n");
-    }
-    else
-    {
-        return (ptr->stack[ptr->top-position+1]);
-    }
+// peek function retuns the item of given position.
+int peek(struct STACK *ptr, int position)
+{
+    return (ptr->stack[ptr->top - position + 1]);
 }
 
 int isFull(struct STACK *ptr)
@@ -90,10 +85,10 @@ void operations()
 // main function.
 int main(void)
 {
-    int choice,pos;
+    int choice, pos;
     struct STACK *s = (struct STACK *)malloc(sizeof(struct STACK));
     printf("Enter the Max_size of Stack : ");
-    scanf("%d",&s->max_size);
+    scanf("%d", &s->max_size);
     // s->max_size = 5;
     s->top = -1;
     s->stack = (int *)malloc(s->max_size * sizeof(int));
@@ -115,8 +110,11 @@ int main(void)
             break;
         case 4:
             printf("\nEnter the position : ");
-            scanf("%d",&pos);
-            printf("\n%d element is present at %d position.\n",peek(s,pos),pos);
+            scanf("%d", &pos);
+            if ((s->top - pos + 1) >= 0)
+                printf("\n%d element is present at %d position.\n", peek(s, pos), pos);
+            else
+                printf("\nSorry you have entered a wrong position.\n");
             break;
         case 5:
             exit(EXIT_SUCCESS);
